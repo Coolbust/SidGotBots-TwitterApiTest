@@ -16,7 +16,7 @@ except:
 
 
 try:
-   # api.update_status("Auto Test Update 02: Lemme get a taste")
+   # api.update_status("Auto Test Update 02: Lemme get a test")
     # print("Update succesful")
     print("test")
    #Print my followers
