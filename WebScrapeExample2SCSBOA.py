@@ -1,4 +1,5 @@
 import requests
+import tweepy
 from bs4 import BeautifulSoup
 
 r= requests.get("https://www.scsboa.org/field-recaps/)")
@@ -21,46 +22,49 @@ while i < x:
     i=i + 1
     #print(pdfs)
 
-print(object)
+#print(object)
 #nPfds = str(pdfs)
-print('\n')
+#print('\n')
 #print(aDict)
 addressString = aDict.__getitem__("id0")
 nAddressString = str(addressString)
 index = nAddressString.find('href')
 endIndex = nAddressString.find('.pdf"')
-print(nAddressString)
+#print(nAddressString)
 
-print(type(nAddressString))
+#print(type(nAddressString))
 startPoint = index
 endPoint = endIndex
 finAddressString = ''
 finAddressString = (nAddressString[startPoint+6 : endPoint+4])
 
-print(startPoint)
-print(endPoint)
-#print(index)
-#print(endIndex)
-#print(addressString[startPoint:endPoint])
-
-
-#while index < len(addressString):
- #   finAddressString += addressString.split()
-  #  index = index + 1
-
-#print(type(pdfs))
-#print(pdfs)
-#ad = pdfs.getItem("id")
-
-print("This is a test")
+#print(startPoint)
+#print(endPoint)
 print(finAddressString)
 
+# Code to Authenticate to Twiiter
+auth = tweepy.OAuthHandler("Your Handler Key",
+"Your secret Key")
+
+auth.set_access_token("Access Token",
+"Secret Access Token")
+
+# Create API object
+api = tweepy.API(auth)
+
+# Create a tweet
+try:
+    api.verify_credentials()
+    print("Auth OK")
+except:
+    print("Error during auth")
 
 
-
-#Figure out how to take out and reformat the hyper link
-#psuedo code traverse thru the item until the text displays the "href and from there we can store the https link"
-#for item in pdfs:
-    #w = item.find_all("href")[0]
-
-#print(w)
+try:
+    api.update_status("Test Results: " + finAddressString)
+    print("Update succesful")
+    #print("test")
+   #Print my followers
+   # print(api.followers(api.me()))
+except:
+    print("Update fail")
